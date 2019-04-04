@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sub = this.apiVersionService.getApiVersion().subscribe(
       ver => {
         console.log(ver);
-        this.version = ver.apiVersion;
+        this.version = ver;
       },
       err => {
         console.error(err);
