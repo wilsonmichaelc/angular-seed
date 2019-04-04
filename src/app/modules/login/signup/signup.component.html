@@ -1,0 +1,49 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+  <div>
+    <h1 fxLayoutAlign="center" translate>APP_NAME</h1>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+      <h4 class="version">v{{ version }}</h4>
+    </div>
+  </div>
+  <div class="login-container" fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
+      <!-- Sign Up -->
+      <h2 fxLayoutAlign="center">Create an Account</h2>
+      <form (ngSubmit)="signup()" [formGroup]="signupForm" autocomplete="off" novalidate>
+        <div class="login-error" [hidden]="!signupError || isLoading">
+          {{ signupError }}
+        </div>
+        <br />
+        <div fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput formControlName="email" autocomplete="false" [placeholder]="'Email'" />
+            <mat-error *ngIf="signupForm.controls.email.invalid && !signupForm.controls.email.untouched">
+              <span>Email is required</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              autocomplete="false"
+              [placeholder]="'Password'"
+              required
+            />
+            <mat-error *ngIf="signupForm.controls.password.invalid && !signupForm.controls.password.untouched">
+              <span>Password must contain: 1 uppercase, 1 lowercase, 1 number, 1 special character, at least 8 characters in length.</span
+              >
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid || isLoading">
+            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+            <span>Sign Up</span>
+          </button>
+          <br />
+          <div>Already have an account? <a class="sign-up" routerLink="/login">Login</a></div>
+        </div>
+      </form>
+      <!-- / Sign Up -->
+    </mat-card>
+  </div>
+</div>

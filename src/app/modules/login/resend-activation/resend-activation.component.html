@@ -1,0 +1,37 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+  <div>
+    <h1 fxLayoutAlign="center" translate>APP_NAME</h1>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+      <h4 class="version">v{{ version }}</h4>
+    </div>
+  </div>
+  <div class="login-container" fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
+      <!-- Resend Activation Email -->
+      <h2 fxLayoutAlign="center">Resend Activation Email</h2>
+      <h4 fxLayoutAlign="center">Please activate your account before you sign in.</h4>
+      <form (ngSubmit)="resendActivationEmail()" [formGroup]="resendActivationForm" novalidate>
+        <div class="login-error" [hidden]="!activateError || isLoading">
+          {{ activateError }}
+        </div>
+        <div fxLayout="column">
+          <mat-form-field>
+            <input type="text" matInput formControlName="email" autocomplete="email" [placeholder]="'Email'" required />
+            <mat-error *ngIf="resendActivationForm.controls.email.valid || resendActivationForm.controls.email.untouched">
+              <span>Email is required</span>
+            </mat-error>
+          </mat-form-field>
+          <br />
+          <button mat-raised-button color="primary" type="submit" [disabled]="resendActivationForm.invalid || isLoading">
+            <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+            <span>Resend Activation Email</span>
+          </button>
+          <br />
+          <div>Need an account? <a class="sign-up" routerLink="/signup">Sign Up</a></div>
+          <div>Already have an account? <a class="login" routerLink="/login">Login</a></div>
+        </div>
+      </form>
+      <!-- / Resend Activation Email -->
+    </mat-card>
+  </div>
+</div>

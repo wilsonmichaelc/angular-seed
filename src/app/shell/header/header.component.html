@@ -1,0 +1,48 @@
+<mat-toolbar class="mat-elevation-z6 navbar" color="primary">
+
+  <div fxHide.gt-sm fxLayoutAlign="start center">
+    <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title">{{ title }}</span>
+  </div>
+
+  <div fxHide.lt-md>
+    <a class="brand" routerLink="/" translate>APP_NAME</a>
+    <button mat-button routerLink="/home" routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button routerLink="/about" routerLinkActive="active">
+      <mat-icon>info</mat-icon>
+      <span>About</span>
+    </button>
+  </div>
+
+  <span fxFlex></span>
+
+  <small class="version">{{ version }}</small>
+
+  <span *ngIf="authState" class="is-authenticated">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <mat-list>
+        <mat-list-item>
+          <span>Logged in as</span>&nbsp;<b>{{ username }}</b>
+        </mat-list-item>
+
+        <mat-list-item *appHasAnyAuthority="'user'">
+          <button mat-icon-button routerLink="/settings" routerLinkActive="active">
+            <mat-icon>settings</mat-icon>&nbsp;<span>Settings</span>
+          </button>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+      </mat-list>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </span>
+
+</mat-toolbar>

@@ -1,0 +1,14 @@
+.DS_Store
+*.log
+coverage/
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+angular.json
+tsconfig.json
+tsconfig.*.json
+tslint.json
+polyfills.ts
+test.ts
+typings.d.ts

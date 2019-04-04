@@ -1,0 +1,26 @@
+<div fxFlex>
+  <mat-sidenav-container fxFill>
+    <mat-sidenav #sidenav mode="over" ngClass.gt-sm="has-border">
+      <nav>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/home" routerLinkActive="active" (click)="sidenav.close()">
+            <span id="home">Home</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="sidenav.close()">
+            <span id="about">About</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a *appHasAnyAuthority="'user'" mat-list-item routerLink="/settings" routerLinkActive="active" (click)="sidenav.close()">
+            <span id="settings">Settings</span>
+          </a>
+        </mat-list>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-header [sidenav]="sidenav" [authState]="authState"></app-header>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
