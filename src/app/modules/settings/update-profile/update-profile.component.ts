@@ -19,13 +19,19 @@ export class UpdateProfileComponent implements OnInit {
   isLoading: boolean;
   profileForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private settingsService: SettingsService) {}
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private settingsService: SettingsService) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
-    this.createForm();
-    this.settingsService.getUser().then((user: User) => {
-      this.profileForm.patchValue(user);
-    });
+    this.settingsService
+      .getUser()
+      .then((user: User) => {
+        this.profileForm.patchValue(user);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   updateProfile(): void {

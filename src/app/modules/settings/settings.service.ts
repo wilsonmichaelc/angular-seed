@@ -7,10 +7,10 @@ export class SettingsService {
   constructor(private httpClient: HttpClient) {}
 
   getUser(): Promise<any> {
-    return this.httpClient.get('http://localhost:8083/users').toPromise();
+    return this.httpClient.get('/users').toPromise();
   }
 
   updateUser(user: User): Promise<any> {
-    return this.httpClient.post('http://localhost:8083/users', user).toPromise();
+    return this.httpClient.post('/users', user).toPromise();
   }
 }
