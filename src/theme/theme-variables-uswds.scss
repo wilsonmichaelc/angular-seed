@@ -1,0 +1,59 @@
+/*
+ * Application global variables.
+ */
+
+@import '~uswds/src/stylesheets/lib/bourbon';
+@import '~uswds/src/stylesheets/core/variables';
+
+// Angular Material custom theme
+// See https://material.angular.io/guide/theming for more details.
+//
+// You can also read https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+// for more insight validate Angular Material theming.
+@import '~@angular/material/theming';
+
+$app-primary: (
+  100: $color-primary,
+  500: $color-primary-darker,
+  900: $color-primary-darkest,
+  contrast: (
+    100: $color-gray-dark,
+    500: $color-white,
+    900: $color-white
+  )
+);
+
+$app-secondary: (
+  100: $color-secondary-lightest,
+  300: $color-secondary-light,
+  500: $color-secondary,
+  700: $color-secondary-dark,
+  900: $color-secondary-darkest,
+  contrast: (
+    100: $color-gray-dark,
+    300: $color-white,
+    500: $color-white,
+    700: $color-white,
+    900: $color-white
+  )
+);
+
+$app-warn: (
+  100: $color-red-lightest,
+  500: $color-red,
+  900: $color-red-darkest,
+  contrast: (
+    100: $color-gray-dark,
+    500: $color-white,
+    900: $color-white
+  )
+);
+
+$palette-primary: mat-palette($app-primary);
+$palette-secondary: mat-palette($app-secondary);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($palette-primary, $palette-secondary, $app-warn);

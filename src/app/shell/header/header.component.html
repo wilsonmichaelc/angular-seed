@@ -1,5 +1,4 @@
 <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
-
   <div fxHide.gt-sm fxLayoutAlign="start center">
     <button class="menu-button" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -32,17 +31,22 @@
         <mat-list-item>
           <span>Logged in as</span>&nbsp;<b>{{ username }}</b>
         </mat-list-item>
-
-        <mat-list-item *appHasAnyAuthority="'user'">
+        <!-- <mat-list-item *appHasAnyAuthority="'user'">
           <button mat-icon-button routerLink="/settings" routerLinkActive="active">
             <mat-icon>settings</mat-icon>&nbsp;<span>Settings</span>
           </button>
-        </mat-list-item>
-
+        </mat-list-item> -->
         <mat-divider></mat-divider>
       </mat-list>
-      <button mat-menu-item (click)="logout()">Logout</button>
+      <button mat-menu-item routerLink="/settings" routerLinkActive="active">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
     </mat-menu>
   </span>
-
 </mat-toolbar>

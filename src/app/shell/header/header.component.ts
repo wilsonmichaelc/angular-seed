@@ -1,8 +1,7 @@
-import { Title } from '@angular/platform-browser';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-
-import { I18nService, AuthenticationService } from '@app/core';
+import { Title } from '@angular/platform-browser';
+import { AuthenticationService } from '@app/core';
 import { ApiVersionService } from '@app/shared/services/api-version.service';
 import { Subscription } from 'rxjs';
 
@@ -17,13 +16,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   version = '';
   sub: Subscription;
+  title: string;
+  username: string;
 
   constructor(
     private titleService: Title,
     private authenticationService: AuthenticationService,
-    private i18nService: I18nService,
     private apiVersionService: ApiVersionService
-  ) {}
+  ) {
+    this.title = this.titleService.getTitle();
+    this.username = this.authenticationService.getCurrentUserEmail();
+  }
 
   ngOnInit() {
     this.sub = this.apiVersionService.getApiVersion().subscribe(
@@ -43,27 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
-
   logout() {
     this.authenticationService.logout();
-  }
-
-  get username(): string {
-    return this.authenticationService.getCurrentUserEmail();
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
-  }
-
-  get title(): string {
-    return this.titleService.getTitle();
   }
 }

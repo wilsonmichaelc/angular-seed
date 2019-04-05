@@ -1,0 +1,46 @@
+<h2 fxLayoutAlign="center">Update Profile</h2>
+<form (ngSubmit)="updateProfile()" [formGroup]="profileForm" novalidate>
+  <div fxLayout="column">
+    <!-- First Name -->
+    <mat-form-field>
+        <input
+          id="first-name"
+          type="text"
+          matInput
+          formControlName="first"
+          autocomplete="firstName"
+          [placeholder]="'First Name'"
+        />
+      </mat-form-field>
+
+    <!-- Last Name -->
+    <mat-form-field>
+      <input
+        id="last-name"
+        type="text"
+        matInput
+        formControlName="last"
+        autocomplete="lastName"
+        [placeholder]="'Last Name'"
+      />
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field>
+        <input
+          id="email"
+          type="email"
+          matInput
+          formControlName="email"
+          autocomplete="email"
+          [placeholder]="'Email'"
+        />
+      </mat-form-field>
+
+    <br />
+    <button id="update-profile-btn" mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid || isLoading">
+      <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
+      <span>Update Profile</span>
+    </button>
+  </div>
+</form>

@@ -1,17 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { User } from './update-profile/update-profile.component';
 
 @Injectable()
 export class SettingsService {
   constructor(private httpClient: HttpClient) {}
 
-  search(): Observable<string> {
-    return this.httpClient.get('/version', { responseType: 'json' }).pipe(
-      map((res: any) => res),
-      catchError(err => of(`Error executing search: ${err.message}`))
-    );
+  getUser(): Promise<any> {
+    return this.httpClient.get('http://localhost:8083/users').toPromise();
+  }
+
+  updateUser(user: User): Promise<any> {
+    return this.httpClient.post('http://localhost:8083/users', user).toPromise();
   }
 }

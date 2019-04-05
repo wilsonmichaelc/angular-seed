@@ -9,13 +9,13 @@ import { AuthenticationDetails, CognitoUserPool, CognitoUser, CognitoUserAttribu
 
 @Injectable()
 export class AuthenticationService {
-  private _cognitoUser: any = null;
+  private _cognitoUser: CognitoUser = null;
   private _authState = new Subject<any>();
   private _poolData = { UserPoolId: environment.poolData.UserPoolId, ClientId: environment.poolData.ClientId };
 
   constructor(private router: Router, private jwtService: JwtService) {}
 
-  signup(context: any) {
+  signup(context: any): Promise<any> {
     const attribute = { Name: 'email', Value: context.email };
     const attributeEmail = new CognitoUserAttribute(attribute);
     const attributeList = [attributeEmail];
@@ -30,7 +30,7 @@ export class AuthenticationService {
     });
   }
 
-  resendActivationEmail(context: any) {
+  resendActivationEmail(context: any): Promise<any> {
     const userPool = new CognitoUserPool(this._poolData);
     const userData = { Username: context.email, Pool: userPool };
     const cognitoUser = new CognitoUser(userData);
@@ -44,7 +44,7 @@ export class AuthenticationService {
     });
   }
 
-  login(context: LoginContext): Observable<boolean> {
+  login(context: LoginContext): Observable<any> {
     return new Observable((observer: any) => {
       const authenticationData = {
         Username: context.username,
@@ -53,8 +53,8 @@ export class AuthenticationService {
       const authenticationDetails = new AuthenticationDetails(authenticationData);
       const userPool = new CognitoUserPool(this._poolData);
       const userData = { Username: context.username, Pool: userPool };
-      const cognitoUser = new CognitoUser(userData);
-      cognitoUser.authenticateUser(authenticationDetails, {
+      this._cognitoUser = new CognitoUser(userData);
+      this._cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result: any) => {
           this._authState.next(true);
           observer.next(result);
@@ -79,7 +79,7 @@ export class AuthenticationService {
     this.router.navigate(['/login'], { replaceUrl: true });
   }
 
-  initiateForgotPassword(username: string) {
+  initiateForgotPassword(username: string): Promise<any> {
     const userPool = new CognitoUserPool(this._poolData);
     const userData = { Username: username, Pool: userPool };
     const cognitoUser = new CognitoUser(userData);
@@ -95,7 +95,7 @@ export class AuthenticationService {
     });
   }
 
-  completeForgotPassword(context: any) {
+  completeForgotPassword(context: any): Promise<any> {
     const userPool = new CognitoUserPool(this._poolData);
     const userData = { Username: context.username, Pool: userPool };
     const cognitoUser = new CognitoUser(userData);
@@ -111,7 +111,19 @@ export class AuthenticationService {
     });
   }
 
-  getCurrentUser() {
+  changePassword(oldPassword: string, newPassword: string): Promise<any> {
+    return new Promise(resolve => {
+      this._cognitoUser.changePassword(oldPassword, newPassword, (err, result) => {
+        if (!err) {
+          resolve();
+        } else {
+          resolve(err);
+        }
+      });
+    });
+  }
+
+  getCurrentUser(): CognitoUser {
     if (!this._cognitoUser) {
       const userPool = new CognitoUserPool(this._poolData);
       this._cognitoUser = userPool.getCurrentUser();
@@ -119,7 +131,7 @@ export class AuthenticationService {
     return this._cognitoUser;
   }
 
-  getIdToken() {
+  getIdToken(): string {
     const cognitoUser = this.getCurrentUser();
     if (!cognitoUser) {
       return '';

@@ -21,11 +21,11 @@ export class LoginComponent {
 
   login() {
     this.isLoading = true;
-    this.authenticationService.login(this.loginForm.value).subscribe((response: any) => {
+    this.authenticationService.login(this.loginForm.value).subscribe(response => {
       this.isLoading = false;
       this.loginForm.reset();
       if (response.hasOwnProperty('idToken')) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['home']);
       } else if (response.hasOwnProperty('code') && response['code'] === 'UserNotConfirmedException') {
         this.isLoading = true;
         this.loginError = response['message'];
@@ -42,8 +42,7 @@ export class LoginComponent {
   private createForm() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      remember: true
+      password: ['', [Validators.required]]
     });
   }
 }

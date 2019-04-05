@@ -8,9 +8,6 @@ export class ApiVersionService {
   constructor(private httpClient: HttpClient) {}
 
   getApiVersion(): Observable<any> {
-    return this.httpClient
-      .disableApiPrefix()
-      .get('/version', { responseType: 'text' })
-      .pipe(catchError(err => of('')));
+    return this.httpClient.get('/version', { responseType: 'text' }).pipe(catchError(err => of('')));
   }
 }

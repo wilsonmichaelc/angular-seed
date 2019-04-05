@@ -10,18 +10,18 @@
       <!-- Initiate Password Reset -->
       <h2 fxLayoutAlign="center">Reset My Password</h2>
       <form (ngSubmit)="initiateForgotPassword()" [formGroup]="initResetForm" novalidate>
-        <div class="login-error" [hidden]="!initResetError || isLoading">
+        <div class="init-reset-error" [hidden]="!initResetError || isLoading">
           {{ initResetError }}
         </div>
         <div fxLayout="column">
           <mat-form-field>
-            <input type="text" matInput formControlName="email" autocomplete="email" [placeholder]="'Email'" required />
+            <input type="text" matInput formControlName="email" id="email" autocomplete="email" [placeholder]="'Email'" required />
             <mat-error *ngIf="initResetForm.controls.email.valid || initResetForm.controls.email.untouched">
               <span>Email is required</span>
             </mat-error>
           </mat-form-field>
           <br />
-          <button mat-raised-button color="primary" type="submit" [disabled]="initResetForm.invalid || isLoading">
+          <button mat-raised-button color="primary" type="submit" id="init-reset-btn" [disabled]="initResetForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span>Send Reset Link</span>
           </button>

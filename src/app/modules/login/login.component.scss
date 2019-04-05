@@ -19,7 +19,10 @@
   width: 100%;
 }
 
-.login-error {
+.login-error,
+.reset-error,
+.init-reset-error,
+.resend-activation-error {
   color: mat-color($app-warn);
 }
 

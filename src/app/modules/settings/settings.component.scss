@@ -1,19 +1,13 @@
 @import 'src/theme/theme-variables';
 
 .container {
+  display: flex;
   text-align: center;
   padding: 1em;
 }
 
-.logo {
-  width: 150px;
-  margin: 0 auto;
-}
-
-q {
-  font-style: italic;
-}
-
 .mat-card {
-  width: 100%;
+  flex: 1;
+  margin: 20px;
+  max-width: 700px;
 }

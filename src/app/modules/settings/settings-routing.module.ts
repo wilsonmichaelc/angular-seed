@@ -11,7 +11,7 @@ const routes: Routes = [
     {
       path: 'settings',
       component: SettingsComponent,
-      canActivate: [RoleGuard],
+      // canActivate: [RoleGuard],
       data: {
         roles: ['user'],
         title: extract('Settings')

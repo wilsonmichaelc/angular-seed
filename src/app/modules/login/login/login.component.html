@@ -16,21 +16,14 @@
         <br />
         <div fxLayout="column">
           <mat-form-field>
-            <input
-              id="login-username"
-              type="text"
-              matInput
-              formControlName="username"
-              autocomplete="username"
-              [placeholder]="'Username'"
-            />
+            <input id="username" type="text" matInput formControlName="username" autocomplete="username" [placeholder]="'Username'" />
             <mat-error *ngIf="loginForm.controls.username.valid || loginForm.controls.username.untouched">
               <span>Username is required</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field>
             <input
-              id="login-password"
+              id="password"
               type="password"
               matInput
               formControlName="password"
@@ -44,7 +37,7 @@
           </mat-form-field>
           <a class="password-reset" routerLink="/request-reset">Forgot your password?</a>
           <br />
-          <button id="login-login-btn" mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+          <button mat-raised-button color="primary" type="submit" id="login-btn" [disabled]="loginForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span>Login</span>
           </button>

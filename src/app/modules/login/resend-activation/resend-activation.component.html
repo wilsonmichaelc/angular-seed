@@ -11,18 +11,18 @@
       <h2 fxLayoutAlign="center">Resend Activation Email</h2>
       <h4 fxLayoutAlign="center">Please activate your account before you sign in.</h4>
       <form (ngSubmit)="resendActivationEmail()" [formGroup]="resendActivationForm" novalidate>
-        <div class="login-error" [hidden]="!activateError || isLoading">
+        <div class="resend-activation-error" [hidden]="!activateError || isLoading">
           {{ activateError }}
         </div>
         <div fxLayout="column">
           <mat-form-field>
-            <input type="text" matInput formControlName="email" autocomplete="email" [placeholder]="'Email'" required />
+            <input type="text" matInput formControlName="email" id="email" autocomplete="email" [placeholder]="'Email'" required />
             <mat-error *ngIf="resendActivationForm.controls.email.valid || resendActivationForm.controls.email.untouched">
               <span>Email is required</span>
             </mat-error>
           </mat-form-field>
           <br />
-          <button mat-raised-button color="primary" type="submit" [disabled]="resendActivationForm.invalid || isLoading">
+          <button mat-raised-button color="primary" type="submit" id="resend-btn" [disabled]="resendActivationForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
             <span>Resend Activation Email</span>
           </button>
