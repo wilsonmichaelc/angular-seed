@@ -14,39 +14,6 @@ Angular Seed Application
  npm start
  ```
 
-3. Stand up AWS infrastructure (replace *** with override values)
-    - Get AcmCertArn from AWS Certificate Manager or create with,
-    ```sh
-    aws acm request-certificate --domain-name *** --validation-method DNS --idempotency-token 1234 --options CertificateTransparencyLoggingPreference=DISABLED
-    ```
-
-    - Then execute your CloudFormation template with parameters. (stack-name example: ngx-rocket-cognito)
-    ```sh
-    aws cloudformation deploy --template-file cloudformation.yml --stack-name *** --parameter-overrides BaseUrl=*** AppUrl=*** AcmCertArn=***
-    ```
-
-4. Deploy to AWS
-    - Get AppBucket and DistributionId for your stack.
-    ```sh
-    aws cloudformation describe-stacks --stack-name aws-ng-demo --query "Stacks[0].Outputs[?OutputKey==`DistributionId` || OutputKey==`AppBucket`]"
-    ```
-
-    - Add this script to your package.json Replace {AppBucket} and {DistributionId} with results from above.
-    ```json
-    "deploy": "npm run env -s && ng build --prod --aot && aws s3 sync dist/demo-app s3://{AppBucket} && aws cloudfront create-invalidation --distribution-id {DistributionId} --paths /",
-    ```
-
-    - Execute deployment
-    ```sh
-    npm run deploy
-    ```
-
-5. Cleanup
-```sh
-aws s3 rm s3://{AppBucket} --recursive
-aws cloudformation delete-stack --stack-name ***
-```
-
 # Project structure
 
 ```
