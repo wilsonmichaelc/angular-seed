@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CoreModule, AuthenticationService } from '@app/core';
+import { AuthenticationService, CoreModule } from '@app/core';
 import { MaterialModule } from '@app/material.module';
 import { SharedModule } from '@app/shared';
-
-import { SettingsService } from '../settings.service';
-import { ChangePasswordComponent } from './change-password.component';
-import { By } from '@angular/platform-browser';
 import { click } from '@app/testing/utils';
+
+import { ChangePasswordComponent } from './change-password.component';
 
 describe('ChangePasswordComponent', () => {
   let component: ChangePasswordComponent;

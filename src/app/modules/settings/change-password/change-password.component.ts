@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthenticationService } from '@app/core';
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',

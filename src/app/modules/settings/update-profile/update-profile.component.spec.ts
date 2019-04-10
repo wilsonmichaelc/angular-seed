@@ -24,6 +24,17 @@ describe('UpdateProfileComponent', () => {
     };
   }
 
+  function getFakeUser() {
+    return {
+      first: 'John',
+      last: 'Doe',
+      email: 'test@abc.com',
+      phone: '',
+      addressOne: '',
+      addressTwo: ''
+    };
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -50,16 +61,18 @@ describe('UpdateProfileComponent', () => {
   describe('UpdateProfileComponent', () => {
     it('should create', () => {
       settingsService = TestBed.get(SettingsService);
-      spyOn(settingsService, 'getUser').and.returnValue(Promise.resolve({ first: 'John', last: 'Doe', email: 'test@abc.com' }));
+      spyOn(settingsService, 'getUser').and.returnValue(Promise.resolve(getFakeUser()));
       expect(component).toBeTruthy();
     });
 
     it('should update user profile', fakeAsync(() => {
       const elements = getElements();
+      const fakeUser = getFakeUser();
       settingsService = TestBed.get(SettingsService);
       fixture.detectChanges();
-      spyOn(settingsService, 'updateUser').and.returnValue(Promise.resolve({ first: 'John', last: 'Doe', email: 'test@abc.com' }));
-      component.profileForm.patchValue({ first: 'John', last: 'Smith', email: 'jsmith@example.com' });
+      spyOn(settingsService, 'updateUser').and.returnValue(Promise.resolve(fakeUser));
+      fakeUser.email = 'jsmith@example.com';
+      component.profileForm.patchValue(fakeUser);
       fixture.detectChanges();
       click(elements.updateProfileBtn);
       fixture.detectChanges();

@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
+import { User } from '../settings.entities';
 import { SettingsService } from '../settings.service';
-
-export class User {
-  first: string;
-  last: string;
-  email: string;
-}
 
 @Component({
   selector: 'app-update-profile',
@@ -36,7 +31,7 @@ export class UpdateProfileComponent implements OnInit {
 
   updateProfile(): void {
     this.isLoading = true;
-    this.settingsService.updateUser(this.profileForm.value as User).then((res: any) => {
+    this.settingsService.updateUser(this.profileForm.value).then((res: User) => {
       this.isLoading = false;
     });
   }
@@ -45,7 +40,10 @@ export class UpdateProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       first: ['', []],
       last: ['', []],
-      email: ['', []]
+      email: ['', []],
+      phone: ['', []],
+      addressOne: ['', []],
+      addressTwo: ['', []]
     });
   }
 }
