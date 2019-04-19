@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService, CoreModule } from '@app/core';
 import { MaterialModule } from '@app/material.module';
-import { HomeComponent } from '@app/modules/home/home.component';
 import { SharedModule } from '@app/shared';
 import { click } from '@app/testing/utils';
 import { TranslateModule } from '@ngx-translate/core';
@@ -40,10 +39,9 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         TranslateModule.forRoot(),
         ReactiveFormsModule,
-        CoreModule,
-        RouterTestingModule.withRoutes([{ path: 'home', component: HomeComponent }])
+        CoreModule
       ],
-      declarations: [LoginComponent, HomeComponent],
+      declarations: [LoginComponent],
       providers: [AuthenticationService]
     }).compileComponents();
   }));
