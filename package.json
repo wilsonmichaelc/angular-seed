@@ -72,6 +72,7 @@
     "lint-staged": "^8.1.5",
     "prettier": "^1.16.4",
     "protractor": "~5.4.0",
+    "protractor-accessibility-plugin": "^0.3.0",
     "puppeteer": "^1.13.0",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^5.0.0",
