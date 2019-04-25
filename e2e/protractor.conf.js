@@ -13,27 +13,9 @@ exports.config = {
   //       chromeOptions: {args:['no-sandbox','--headless','disable-gpu']}}
   //   ],
   plugins: [{
-    axe: true,
     chromeA11YDevTools: {
       treatWarningsAsFailures: true,
       auditConfiguration: {
-        // auditRulesToRun: [
-        //   'audioWithoutControls',
-        //   'badAriaAttributeValue',
-        //   'badAriaRole',
-        //   'controlsWithoutLabel',
-        //   'elementsWithMeaningfulBackgroundImage',
-        //   'focusableElementNotVisibleAndNotAriaHidden',
-        //   'imagesWithoutAltText',
-        //   'linkWithUnclearPurpose',
-        //   'lowContrastElements',
-        //   'mainRoleOnInappropriateElement',
-        //   'nonExistentAriaLabelledbyElement',
-        //   'pageWithoutTitle',
-        //   'requiredAriaAttributeMissing',
-        //   'unfocusableElementsWithOnClick',
-        //   'videoWithoutCaptions'
-        // ],
         auditRulesToSkip: []
       }
     },
