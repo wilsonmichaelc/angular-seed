@@ -1,7 +1,7 @@
 import { LoginPage } from './login.po';
-import { browser, element, by } from 'protractor';
+import { browser } from 'protractor';
 
-describe('app', () => {
+describe('Login', () => {
   const page = new LoginPage();
 
   beforeEach(() => {
@@ -9,12 +9,12 @@ describe('app', () => {
     browser.waitForAngularEnabled(false);
   });
 
-  it('As a user I should be displayed the login page', () => {
+  it('As a user I should be displayed the login page if not logged in', () => {
     page.navigateTo();
     expect(browser.getCurrentUrl()).toContain('/login');
   });
 
-  it('Should be able to login with valid credentials', function() {
+  it('As a user I should be able to login with valid credentials', function() {
     page.usernameInput.sendKeys(process.env.PROTRACTOR_USERNAME);
     page.passwordInput.sendKeys(process.env.PROTRACTOR_PASSWORD);
     page.loginButton.click();

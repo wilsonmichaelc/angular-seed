@@ -1,12 +1,11 @@
-import { LoginPage } from './home.po';
-import { browser, element, by } from 'protractor';
+import { HomePage } from './home.po';
+import { browser } from 'protractor';
 
-describe('home', () => {
-  const page = new LoginPage();
+describe('Home', () => {
+  const page = new HomePage();
 
   beforeAll(() => {
     page.navigateTo();
-    browser.waitForAngularEnabled(false);
   });
 
   beforeEach(() => {

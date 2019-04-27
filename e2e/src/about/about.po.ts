@@ -1,11 +1,11 @@
 import { browser } from 'protractor';
 
-export class HomePage {
+export class AboutPage {
   constructor() {
     this.navigateTo();
   }
 
   navigateTo() {
-    return browser.get('/home');
+    return browser.get('/about');
   }
 }

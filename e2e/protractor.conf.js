@@ -15,16 +15,24 @@ var ScreenshotAndStackReporter = new HtmlScreenshotReporter({
   reportTitle: "E2E Testing Report",
   showSummary: true,
   reportOnlyFailedSpecs: false,
-  captureOnlyFailedSpecs: true,
+  captureOnlyFailedSpecs: false
 });
 
 exports.config = {
   allScriptsTimeout: 11000,
+  // specs: [
+  //   './src/login/*.e2e-spec.ts',
+  //   './src/home/*.e2e-spec.ts',
+  //   './src/about/*.e2e-spec.ts',
+  //   './src/settings/*.e2e-spec.ts'
+  // ],
   suites: {
     login: './src/login/*.e2e-spec.ts',
     home: [
-      './src/**/*.e2e-spec.ts'
-    ]
+      './src/home/*.e2e-spec.ts'
+    ],
+    about: './src/about/*.e2e-spec.ts',
+    settings: './src/settings/*.e2e-spec.ts'
   },
   plugins: [
     {
