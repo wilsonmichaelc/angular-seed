@@ -8,7 +8,7 @@
   <div class="login-container" fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
       <!-- Login -->
-      <h2 fxLayoutAlign="center" id="card-title">Login</h2>
+      <h2 fxLayoutAlign="center">Login</h2>
       <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
         <div class="login-error" [hidden]="!loginError || isLoading">
           {{ loginError }}
@@ -39,10 +39,10 @@
           <br />
           <button mat-raised-button color="primary" type="submit" id="login-btn" [disabled]="loginForm.invalid || isLoading">
             <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
-            Login
+            <span>Login</span>
           </button>
           <br />
-          <div>Need an account? <a id="sign-up" routerLink="/signup">Sign Up</a></div>
+          <div>Need an account? <a class="sign-up" routerLink="/signup">Sign Up</a></div>
         </div>
       </form>
       <!-- / Login -->

@@ -13,7 +13,7 @@ export const environment = {
   supportedLanguages: ['en-US', 'fr-FR'],
   credentialsKey: 'credentials',
   poolData: {
-    ClientId: 'COGNITO_CLIENT_ID',
-    UserPoolId: 'COGNITO_USED_POOL_ID'
+    ClientId: '134sev86r2fi5iq3j3cts726u3',
+    UserPoolId: 'us-east-1_2CEm8CmxK'
   }
 };

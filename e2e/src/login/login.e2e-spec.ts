@@ -1,30 +1,24 @@
-// login.e2e-spec.ts
 import { LoginPage } from './login.po';
-import { browser } from 'protractor';
+import { browser, element, by } from 'protractor';
 
-describe('Login', () => {
+describe('app', () => {
   const page = new LoginPage();
 
-  // beforeEach(() => {
-  //   page.navigateTo();
-  // });
-
-  it('should navigate to the signup page when the sign up button is clicked', () => {
-    page.navigateTo();
-    page.signUpButton.click();
-    expect(browser.getCurrentUrl()).toContain('signup');
+  beforeEach(() => {
+    browser.driver.sleep(2000);
+    browser.waitForAngularEnabled(false);
   });
 
-  it('should allow a user to log in', () => {
+  it('As a user I should be displayed the login page', () => {
     page.navigateTo();
-    browser.driver.sleep(1000);
+    expect(browser.getCurrentUrl()).toContain('/login');
+  });
 
-    page.usernameInput.sendKeys('wilsonm@twd.com');
-    page.passwordInput.sendKeys('Pa55uuord!');
+  it('Should be able to login with valid credentials', function() {
+    page.usernameInput.sendKeys(process.env.PROTRACTOR_USERNAME);
+    page.passwordInput.sendKeys(process.env.PROTRACTOR_PASSWORD);
     page.loginButton.click();
     browser.driver.sleep(1000);
-
-    expect(browser.getCurrentUrl()).toContain('home');
-    expect(page.getCardTitle()).toContain("There's no place like 127.0.0.1");
+    expect(browser.getCurrentUrl()).toContain('/home');
   });
 });

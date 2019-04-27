@@ -5,26 +5,32 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
   allScriptsTimeout: 11000,
-  specs: [
-    './src/**/*.e2e-spec.ts'
-  ],
+  suites: {
+    login: './src/login/*.e2e-spec.ts',
+    home: [
+      './src/**/*.e2e-spec.ts'
+    ]
+  },
   // multiCapabilities: [
   //       {browserName: 'chrome',
   //       chromeOptions: {args:['no-sandbox','--headless','disable-gpu']}}
   //   ],
-  plugins: [{
-    chromeA11YDevTools: {
-      treatWarningsAsFailures: true,
-      auditConfiguration: {
-        auditRulesToSkip: []
-      }
-    },
-    package: 'protractor-accessibility-plugin'
-  }],
+  plugins: [
+    {
+      axe: true,
+      chromeA11YDevTools: {
+        treatWarningsAsFailures: true,
+        auditConfiguration: {
+          auditRulesToSkip: []
+        }
+      },
+      package: 'protractor-accessibility-plugin'
+    }
+  ],
   capabilities: {
-    chromeOptions: {args:['no-sandbox','--headless','disable-gpu']},
+    chromeOptions: { args: ['no-sandbox', '--headless', 'disable-gpu'] },
     browserName: process.env.PROTRACTOR_BROWSER || 'chrome',
-    seleniumServerJar :'./node_modules/selenium-server-standalone-jar/jar/selenium-server-standalone-3.6.0.jar'
+    seleniumServerJar: './node_modules/selenium-server-standalone-jar/jar/selenium-server-standalone-3.6.0.jar'
   },
   // Only works with Chrome and Firefox
   directConnect: true,
@@ -33,13 +39,20 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function () { }
   },
   onPrepare: function () {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
     // Better console spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
+    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    // Check for environment credentials
+    if (typeof process.env.PROTRACTOR_USERNAME === 'undefined') {
+      console.error('ERROR: System environment variable `PROTRACTOR_USERNAME` is not set.')
+    }
+    if (typeof process.env.PROTRACTOR_PASSWORD === 'undefined') {
+      console.error('ERROR: System environment variable `PROTRACTOR_PASSWORD` is not set.')
+    }
   }
 };
