@@ -16,6 +16,16 @@ const proxyConfig = [
     changeOrigin: true,
     secure: false
   }
+  // This is how to proxy to an external/3rd party api to avoid CORS errors running locally
+  // Calling /news from service... /api is prepended by the http interceptor
+  // {
+  //   context: ['/api/news'],
+  //   pathRewrite: { '^/api/news': '' },
+  //   target: 'https://api.iextrading.com/1.0/stock/aapl/news/last/5',
+  //   changeOrigin: true,
+  //   logLevel: 'debug',
+  //   secure: true
+  // }
 ];
 
 /*
