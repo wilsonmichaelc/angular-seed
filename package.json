@@ -79,7 +79,7 @@
     "protractor-html-reporter-2": "^1.0.4",
     "protractor-jasmine2-screenshot-reporter": "^0.5.0",
     "puppeteer": "^1.13.0",
-    "stylelint": "^9.10.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-recommended-scss": "~3.2.0",
     "stylelint-config-standard": "~18.2.0",
